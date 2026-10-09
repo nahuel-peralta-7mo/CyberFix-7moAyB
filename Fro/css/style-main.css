@@ -1,0 +1,115 @@
+:root {
+    --fondo-principal: #0b0108;
+    --fondo-secundario: #1a0213;
+    --fondo-tersario: #2e0422;
+    --texto-principal: #F3F3F3;
+    --acento: #FF0055;
+    --acento-glow: rgba(255, 0, 85, 0.4);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--fondo-principal);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Estructura del Grid Principal */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+}
+
+/* Tarjetas contenedoras */
+.fondo2 {
+    background-color: var(--fondo-secundario);
+    border: 1px solid rgba(255, 0, 85, 0.2);
+    border-radius: 16px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.fondo2:hover {
+    border-color: var(--acento);
+    transform: translateY(-4px);
+}
+
+/* Ajuste especial para la tarjeta de historial que abarque o centre bien */
+.his {
+    grid-column: 1 / -1; /* Ocupa todo el ancho si hay espacio */
+}
+
+.caja2 {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.fondo3 {
+    background-color: var(--fondo-tersario);
+    box-shadow: 0 0 15px var(--acento-glow);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.fondo3:hover {
+    background-color: var(--acento);
+    box-shadow: 0 0 25px var(--acento);
+    color: #ffffff;
+}
+
+.texto {
+    color: var(--texto-principal);
+    text-shadow: 0 0 6px var(--acento-glow);
+    text-align: center;
+    font-weight: 500;
+}
+
+h2.texto {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Enlaces estilizados como botones */
+.boton1, .boton2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: 1px solid rgba(255, 0, 85, 0.3);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.boton1 {
+    flex: 1;
+    min-width: 180px;
+    height: 90px;
+    margin: 0;
+}
+
+.boton2 {
+    width: 100%;
+    height: 80px;
+    margin: 0;
+}
