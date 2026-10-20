@@ -1,12 +1,179 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Punto de Venta - Sistema Taller</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style-main_punto_de_venta.css">
-    <title>Document</title>
 </head>
 <body>
-    
+
+    <!-- CONTENEDOR GENERAL DE DOS COLUMNAS -->
+    <div class="layout-dashboard">
+
+        <!-- 1. MENÚ LATERAL FIJO (VERTICAL) -->
+        <aside class="sidebar-fijo">
+            <div class="sidebar-logo">
+                <h2>Sistema Taller</h2>
+                <span class="sidebar-sub">Panel de Control</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="../Stock de accesorios/main_stk_accesorios.html" class="sidebar-link">Stock de accesorios</a>
+                <a href="../Stock de repuesto/main_stk_respuesto.html" class="sidebar-link">Stock de repuestos</a>
+                <a href="../Equipo a reparar/main_equipo_reparar.html" class="sidebar-link">Equipo a reparar</a>
+                <a href="../Ver historial de ventas/main-historial.html" class="sidebar-link">Historial</a>
+                <a href="../main.html" class="sidebar-link">← Volver al Menú</a>
+            </nav>
+        </aside>
+
+        <!-- 2. CONTENEDOR PRINCIPAL DE LA VISTA -->
+        <main class="contenedor-principal">
+            
+            <!-- TARJETA/CUADRO GRANDE SUPERIOR (TOTAL Y COBRO) -->
+            <section class="tarjeta-total-venta">
+                <div class="info-venta">
+                    <span class="etiqueta-total">Total a Cobrar</span>
+                    <h1 class="monto-total" id="montoTotalVenta">$0</h1>
+                </div>
+                <div class="acciones-cobro">
+                    <div class="campo-inline">
+                        <label class="label">Cliente (Opcional)</label>
+                        <input type="text" placeholder="Nombre o Teléfono..." class="input-form">
+                    </div>
+                    <div class="campo-inline">
+                        <label class="label">Método de Pago</label>
+                        <select class="input-form">
+                            <option value="efectivo">Efectivo</option>
+                            <option value="transferencia">Transferencia / Mercado Pago</option>
+                            <option value="debito">Tarjeta de Débito</option>
+                            <option value="credito">Tarjeta de Crédito</option>
+                        </select>
+                    </div>
+                    <button class="boton boton-primario btn-cobrar">
+                        Finalizar Venta
+                    </button>
+                </div>
+            </section>
+
+            <!-- CONTENEDOR DE 2 COLUMNAS (ACCESORIOS Y SERVICIOS) -->
+            <div class="grid-pos">
+
+                <!-- COLUMNA 1: ACCESORIOS VENDIDOS -->
+                <div class="columna-pos">
+                    <div class="encabezado-columna">
+                        <h2>Accesorios Vendidos</h2>
+                        <button onclick="abrirModalProducto()" class="boton boton-secundario-acento">
+                            + Agregar Producto
+                        </button>
+                    </div>
+
+                    <div class="contenedor-tabla">
+                        <table class="tabla">
+                            <thead>
+                                <tr class="tabla-header">
+                                    <th class="celda">Producto</th>
+                                    <th class="celda texto-centro">Precio</th>
+                                    <th class="celda texto-centro">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaProductosVenta" class="tabla-cuerpo">
+                                <!-- Ejemplo Estático -->
+                                <tr class="fila-tabla">
+                                    <td class="celda fuente-media">Funda Anti-golpes iPhone 13</td>
+                                    <td class="celda texto-centro">$8.500</td>
+                                    <td class="celda texto-centro">
+                                        <button class="btn-eliminar-simple" title="Borrar">✕</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- COLUMNA 2: SERVICIOS Y REPARACIONES HECHAS -->
+                <div class="columna-pos">
+                    <div class="encabezado-columna">
+                        <h2>Servicios Realizados</h2>
+                        <button onclick="abrirModalServicio()" class="boton boton-secundario-acento">
+                            + Agregar Servicio
+                        </button>
+                    </div>
+
+                    <div class="contenedor-tabla">
+                        <table class="tabla">
+                            <thead>
+                                <tr class="tabla-header">
+                                    <th class="celda">Servicio / Trabajo</th>
+                                    <th class="celda texto-centro">Precio</th>
+                                    <th class="celda texto-centro">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaServiciosVenta" class="tabla-cuerpo">
+                                <!-- Ejemplo Estático -->
+                                <tr class="fila-tabla">
+                                    <td class="celda fuente-media">Cambio de Módulo Samsung A12</td>
+                                    <td class="celda texto-centro">$15.000</td>
+                                    <td class="celda texto-centro">
+                                        <button class="btn-eliminar-simple" title="Borrar">✕</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL AGREGAR PRODUCTO -->
+    <div id="modalProducto" class="modal oculto">
+        <div class="modal-contenido">
+            <h2 class="modal-titulo">Agregar Producto a la Venta</h2>
+            <form onsubmit="agregarProductoVenta(event)">
+                <div class="form-grupo">
+                    <div class="campo">
+                        <label class="label">Buscar o Seleccionar Producto</label>
+                        <input type="text" placeholder="Ej: Cargador Tipo C..." class="input-form" required>
+                    </div>
+                    <div class="campo">
+                        <label class="label">Precio ($)</label>
+                        <input type="number" step="0.01" min="0" placeholder="0.00" class="input-form" required>
+                    </div>
+                </div>
+                <div class="modal-botones">
+                    <button type="button" onclick="cerrarModalProducto()" class="boton boton-secundario">Cancelar</button>
+                    <button type="submit" class="boton boton-primario">Agregar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL AGREGAR SERVICIO -->
+    <div id="modalServicio" class="modal oculto">
+        <div class="modal-contenido">
+            <h2 class="modal-titulo">Agregar Servicio / Mano de Obra</h2>
+            <form onsubmit="agregarServicioVenta(event)">
+                <div class="form-grupo">
+                    <div class="campo">
+                        <label class="label">Descripción del Servicio</label>
+                        <input type="text" placeholder="Ej: Mantenimiento/Limpieza pin de carga..." class="input-form" required>
+                    </div>
+                    <div class="campo">
+                        <label class="label">Monto a Cobrar ($)</label>
+                        <input type="number" step="0.01" min="0" placeholder="0.00" class="input-form" required>
+                    </div>
+                </div>
+                <div class="modal-botones">
+                    <button type="button" onclick="cerrarModalServicio()" class="boton boton-secundario">Cancelar</button>
+                    <button type="submit" class="boton boton-primario">Agregar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </body>
+</html>
 </html>

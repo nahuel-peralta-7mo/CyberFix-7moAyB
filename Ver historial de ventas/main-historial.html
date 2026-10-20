@@ -1,12 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Ventas - Sistema Taller</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style-main_historial.css">
-    <title>Document</title>
 </head>
 <body>
-    
+
+    <!-- CONTENEDOR GENERAL DE DOS COLUMNAS -->
+    <div class="layout-dashboard">
+
+        <!-- 1. MENÚ LATERAL FIJO (VERTICAL) -->
+        <aside class="sidebar-fijo">
+            <div class="sidebar-logo">
+                <h2>Sistema Taller</h2>
+                <span class="sidebar-sub">Panel de Control</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="../Punto de venta/main_puento_venta.html" class="sidebar-link">Punto de venta</a>
+                <a href="../Stock de repuesto/main_stk_respuesto.html" class="sidebar-link">Stock de repuestos</a>
+                <a href="../Equipo a reparar/main_equipo_reparar.html" class="sidebar-link">Equipo a reparar</a>
+                <a href="../Ver historial de ventas/main-historial.html" class="sidebar-link activo">Historial</a>
+                <a href="../main.html" class="sidebar-link">← Volver al Menú</a>
+            </nav>
+        </aside>
+
+        <!-- 2. CONTENEDOR PRINCIPAL DE LA VISTA -->
+        <main class="contenedor-principal">
+            
+            <!-- ENCABEZADO DE LA SECCIÓN -->
+            <header class="encabezado">
+                <h1 class="titulo-principal">Historial de Ventas y Balance</h1>
+            </header>
+
+            <!-- SECCIÓN SUPERIOR: 2 TARJETAS / GRÁFICOS -->
+            <section class="grid-resumen">
+                
+                <!-- Tarjeta 1: Total Vendido / Resumen de Ingresos -->
+                <div class="tarjeta-metrica">
+                    <span class="label-metrica">Total Vendido</span>
+                    <h2 class="monto-destacado">$185.000</h2>
+                    
+                    <div class="desglose-metrica">
+                        <div class="item-desglose">
+                            <span>Ingreso Bruto:</span>
+                            <span class="texto-verde">$185.000</span>
+                        </div>
+                        <div class="item-desglose">
+                            <span>Costo Total:</span>
+                            <span class="texto-rojo">$95.000</span>
+                        </div>
+                        <div class="item-desglose total-ganancia">
+                            <span>Ganancia Neta:</span>
+                            <span class="texto-azul">$90.000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2: Gráfico Circular Costo vs Ganancia -->
+                <div class="tarjeta-metrica tarjeta-grafico">
+                    <span class="label-metrica">Relación Costo / Ganancia</span>
+                    
+                    <div class="contenedor-grafico-donuts">
+                        <!-- Gráfico circular nativo hecho con conic-gradient en CSS -->
+                        <div class="grafico-circular" style="--porcentaje: 48.6%;">
+                            <div class="centro-grafico">
+                                <span class="porcentaje-texto">48.6%</span>
+                                <span class="porcentaje-sub">Margen</span>
+                            </div>
+                        </div>
+
+                        <!-- Leyenda -->
+                        <div class="leyenda-grafico">
+                            <div class="item-leyenda">
+                                <span class="indicador indicador-ganancia"></span>
+                                <span>Ganancia (48.6%)</span>
+                            </div>
+                            <div class="item-leyenda">
+                                <span class="indicador indicador-costo"></span>
+                                <span>Costo (51.4%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- SECCIÓN BÚSQUEDA Y FILTROS -->
+            <div class="seccion-busqueda">
+                <input type="text" id="entradaBusqueda" placeholder="Buscar por producto, repuesto o nombre de cliente..." class="input-busqueda">
+            </div>
+
+            <!-- SECCIÓN TABLA DE VENTAS -->
+            <div class="contenedor-tabla">
+                <table class="tabla">
+                    <thead>
+                        <tr class="tabla-header">
+                            <th class="celda">Producto / Servicio</th>
+                            <th class="celda">Cliente</th>
+                            <th class="celda texto-centro">Costo</th>
+                            <th class="celda texto-centro">Precio Venta</th>
+                            <th class="celda texto-centro">Ganancia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTablaHistorial" class="tabla-cuerpo">
+                        <!-- Fila 1 -->
+                        <tr class="fila-tabla">
+                            <td class="celda fuente-media">Módulo Original Samsung A12</td>
+                            <td class="celda texto-gris">Juan Pérez</td>
+                            <td class="celda texto-centro texto-rojo">$25.000</td>
+                            <td class="celda texto-centro">$45.000</td>
+                            <td class="celda texto-centro texto-verde font-bold">+$20.000</td>
+                        </tr>
+                        <!-- Fila 2 -->
+                        <tr class="fila-tabla">
+                            <td class="celda fuente-media">Funda Anti-golpes iPhone 13</td>
+                            <td class="celda texto-gris">María Gómez</td>
+                            <td class="celda texto-centro texto-rojo">$3.500</td>
+                            <td class="celda texto-centro">$8.500</td>
+                            <td class="celda texto-centro texto-verde font-bold">+$5.000</td>
+                        </tr>
+                        <!-- Fila 3 -->
+                        <tr class="fila-tabla">
+                            <td class="celda fuente-media">Cambio Pin de Carga Moto G8</td>
+                            <td class="celda texto-gris">Lucas Fernández</td>
+                            <td class="celda texto-centro texto-rojo">$4.000</td>
+                            <td class="celda texto-centro">$18.000</td>
+                            <td class="celda texto-centro texto-verde font-bold">+$14.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
 </body>
 </html>
