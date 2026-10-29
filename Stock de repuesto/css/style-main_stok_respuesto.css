@@ -130,6 +130,16 @@ body {
     transition: background-color 0.2s, box-shadow 0.2s;
 }
 
+.agregarRespuesto {
+    background-color: var(--acento);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.5);
+}
+
+.agregarRespuesto:hover {
+    background-color: var(--acento-hover);
+}
+
 .boton-primario {
     background-color: var(--acento);
     color: white;
@@ -267,8 +277,7 @@ body {
 }
 
 .oculto {
-    display: none;
-}
+display: none !important;}
 
 .modal-contenido {
     background-color: var(--fondo-secundario);
@@ -421,3 +430,4 @@ body {
 .opcion-menu.eliminar:hover {
     color: var(--rojo);
 }
+

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Stock - Sistema Celulares</title>
+    <title>Gestión de Stock</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style-main_stok_respuesto.css">
 </head>
+
 <body>
 
     <!-- CONTENEDOR GENERAL DE DOS COLUMNAS -->
@@ -17,7 +19,7 @@
                 <h2>Sistema Taller</h2>
                 <span class="sidebar-sub">Panel de Control</span>
             </div>
-            
+
             <nav class="sidebar-nav">
                 <a href="../Punto de venta/main_puento_venta.html" class="sidebar-link"> Punto de venta</a>
                 <a href="../Stock de accesorios/main_stk_accesorios.html" class="sidebar-link"> Stock de accesorios</a>
@@ -29,22 +31,19 @@
 
         <!-- 2. CONTENEDOR PRINCIPAL DE LA VISTA -->
         <main class="contenedor-principal">
-            
+
             <!-- SECCIÓN DE ENCABEZADO -->
             <header class="encabezado">
                 <div>
-                    <h1 class="titulo-principal">Gestión de Stock: Respuesto</h1>
-                </div>
-                <div>
-                    <button onclick="abrirModal()" class="boton boton-primario">
-                        + Agregar Producto
+                    <button class="boton agregarRespuesto" type="button">
+                        + Agregar Respuesto
                     </button>
                 </div>
             </header>
-
             <!-- SECCIÓN DE BÚSQUEDA RÁPIDA -->
             <div class="seccion-busqueda">
-                <input type="text" id="entradaBusqueda" oninput="filtrarProductos()" placeholder="Buscar accesorio, repuesto, categoría o marca..." class="input-busqueda">
+                <input type="text" id="entradaBusqueda" oninput="filtrarRespuestos()"
+                    placeholder="Buscar accesorio, repuesto, categoría o marca..." class="input-busqueda">
             </div>
 
             <!-- SECCIÓN DE LA TABLA DE INVENTARIO -->
@@ -52,14 +51,14 @@
                 <table class="tabla">
                     <thead>
                         <tr class="tabla-header">
-                            <th class="celda">Producto / Repuesto</th>
+                            <th class="celda">Respuesto / Repuesto</th>
                             <th class="celda">Categoría</th>
                             <th class="celda">Stock</th>
                             <th class="celda">Precio</th>
                             <th class="celda texto-centro">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="cuerpoTablaProductos" class="tabla-cuerpo">
+                    <tbody id="cuerpoTablaRespuestos" class="tabla-cuerpo">
                         <!-- Fila 1 -->
                         <tr class="fila-tabla">
                             <td class="celda fuente-media">Módulo Original Samsung A12</td>
@@ -70,8 +69,9 @@
                                 <div class="menu-acciones">
                                     <button class="btn-tres-puntos" onclick="toggleMenu(event)">⋮</button>
                                     <div class="menu-desplegable oculto">
-                                        <button class="opcion-menu" onclick="editarProducto(1)">Editar</button>
-                                        <button class="opcion-menu eliminar" onclick="eliminarProducto(1)">Eliminar</button>
+                                        <button class="opcion-menu" onclick="editarRespuesto(1)">Editar</button>
+                                        <button class="opcion-menu eliminar"
+                                            onclick="eliminarRespuesto(1)">Eliminar</button>
                                     </div>
                                 </div>
                             </td>
@@ -86,8 +86,9 @@
                                 <div class="menu-acciones">
                                     <button class="btn-tres-puntos" onclick="toggleMenu(event)">⋮</button>
                                     <div class="menu-desplegable oculto">
-                                        <button class="opcion-menu" onclick="editarProducto(2)">Editar</button>
-                                        <button class="opcion-menu eliminar" onclick="eliminarProducto(2)">Eliminar</button>
+                                        <button class="opcion-menu" onclick="editarRespuesto(2)">Editar</button>
+                                        <button class="opcion-menu eliminar"
+                                            onclick="eliminarRespuesto(2)">Eliminar</button>
                                     </div>
                                 </div>
                             </td>
@@ -99,33 +100,33 @@
     </div>
 
     <!-- VENTANA MODAL -->
-    <div id="modalProducto" class="modal oculto">
+    <div id="agregarRespuesto" class="modal oculto" aria-hidden="true">
         <div class="modal-contenido">
-            <h2 class="modal-titulo">Nuevo Producto / Repuesto</h2>
-            
-            <form id="formularioProducto" onsubmit="guardarProducto(event)">
-                <input type="hidden" id="idProducto">
-                
+            <h2 class="modal-titulo">Nuevo Respuesto / Repuesto</h2>
+
+            <form id="formularioRespuesto" onsubmit="guardarRespuesto(event)">
+                <input type="hidden" id="idRespuesto">
+
                 <div class="form-grupo">
                     <div class="campo">
-                        <label class="label">Nombre del Producto / Repuesto</label>
+                        <label for="nombre" class="label">Nombre del Respuesto / Repuesto</label>
                         <input type="text" id="nombre" required class="input-form">
                     </div>
                     <div class="campo">
-                        <label class="label">Categoría (Ej: Accesorios, Repuestos)</label>
+                        <label for="categoria" class="label">Categoría (Ej: Accesorios, Repuestos)</label>
                         <input type="text" id="categoria" required class="input-form">
                     </div>
                     <div class="campo">
-                        <label class="label">Marca / Compatibilidad</label>
+                        <label for="marca" class="label">Marca / Compatibilidad</label>
                         <input type="text" id="marca" required class="input-form">
                     </div>
                     <div class="grid-2">
                         <div class="campo">
-                            <label class="label">Stock</label>
+                            <label for="stock" class="label">Stock</label>
                             <input type="number" id="stock" min="0" required class="input-form">
                         </div>
                         <div class="campo">
-                            <label class="label">Precio</label>
+                            <label for="precio" class="label">Precio</label>
                             <input type="number" step="0.01" id="precio" min="0" required class="input-form">
                         </div>
                     </div>
@@ -139,29 +140,8 @@
         </div>
     </div>
 
-    <!-- SCRIPT PARA CONTROLAR EL MENÚ DESPLEGABLE -->
-    <script>
-        function toggleMenu(event) {
-            event.stopPropagation();
-            
-            // Cierra cualquier otro menú abierto
-            document.querySelectorAll('.menu-desplegable').forEach(menu => {
-                if (menu !== event.currentTarget.nextElementSibling) {
-                    menu.classList.add('oculto');
-                }
-            });
 
-            // Alterna el menú actual
-            const menu = event.currentTarget.nextElementSibling;
-            menu.classList.toggle('oculto');
-        }
-
-        // Cierra los menús si se hace clic fuera de ellos
-        window.addEventListener('click', () => {
-            document.querySelectorAll('.menu-desplegable').forEach(menu => {
-                menu.classList.add('oculto');
-            });
-        });
-    </script>
+    <script src="./JS/JS_main_stock_respuesto.js"></script>
 </body>
+
 </html>

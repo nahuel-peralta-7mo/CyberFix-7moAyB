@@ -1,12 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style_main_equipo_reparar.css">
-    <title>Document</title>
+    <title>Equipos a Reparar - Sistema Taller</title>
 </head>
+
 <body>
-    
+    <!-- CONTENEDOR GENERAL DE DOS COLUMNAS -->
+    <div class="layout-dashboard">
+
+        <!-- 1. MENÚ LATERAL FIJO (VERTICAL) -->
+        <aside class="sidebar-fijo">
+            <div class="sidebar-logo">
+                <h2>Sistema Taller</h2>
+                <span class="sidebar-sub">Panel de Control</span>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="../Punto de venta/main_puento_venta.html" class="sidebar-link">Punto de venta</a>
+                <a href="../Stock de repuesto/main_stk_respuesto.html" class="sidebar-link">Stock de repuestos</a>
+                <a href="../Stock de accesorios/main_stk_accesorios.html" class="sidebar-link">Stock de accesorios</a>
+                <a href="../Ver historial de ventas/main-historial.html" class="sidebar-link">Historial</a>
+                <a href="../main.html" class="sidebar-link">← Volver al Menú</a>
+            </nav>
+        </aside>
+
+        <!-- 2. CONTENEDOR PRINCIPAL -->
+        <main class="contenedor-principal">
+
+            <section>
+                <!-- TARJETAS DE MÉTRICAS -->
+                <div class="grid-resumen">
+                    <div class="tarjeta-metrica">
+                        <span class="label-metrica">En Proceso</span>
+                        <h2 class="monto-destacado" id="count-proceso">8</h2>
+                    </div>
+                    <div class="tarjeta-metrica">
+                        <span class="label-metrica">Esperando Repuesto</span>
+                        <h2 class="monto-destacado" id="count-esperando">5</h2>
+                    </div>
+                    <div class="tarjeta-metrica">
+                        <span class="label-metrica">Listos / Para Entregar</span>
+                        <h2 class="monto-destacado" id="count-listos">6</h2>
+                    </div>
+                    <div class="tarjeta-metrica">
+                        <span class="label-metrica">Total en Taller</span>
+                        <h2 class="monto-destacado" id="count-total">19</h2>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="boton agregarEquipo" type="button">
+                        + Agregar Equipo
+                    </button>
+                </div>
+
+                <!-- SECCIÓN DE LA TABLA DE EQUIPOS -->
+                <div class="contenedor-tabla">
+                    <table class="tabla">
+                        <thead>
+                            <tr class="tabla-header">
+                                <th class="celda">Equipo</th>
+                                <th class="celda">Cliente</th>
+                                <th class="celda">Estado</th>
+                                <th class="celda">Problema</th>
+                                <th class="celda texto-centro">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTablaEquipos" class="tabla-cuerpo">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+
+    <div id="agregarEquipo" class="modal oculto" aria-hidden="true">
+        <div class="modal-contenido">
+            <h2 class="modal-titulo">Nuevo Equipo a Reparar</h2>
+
+            <form id="formularioEquipo" onsubmit="guardarEquipo(event)">
+                <input type="hidden" id="idEquipo">
+
+                <div class="form-grupo">
+                    <div class="campo">
+                        <label for="equipo" class="label">Equipo</label>
+                        <input type="text" id="equipo" required class="input-form">
+                    </div>
+                    <div class="campo">
+                        <label for="cliente" class="label">Cliente</label>
+                        <input type="text" id="cliente" required class="input-form">
+                    </div>
+                    <div class="campo">
+                        <label for="estado" class="label">Estado</label>
+                        <select id="estado" required class="input-form">
+                            <option value="En Proceso">En Proceso</option>
+                            <option value="Esperando Repuesto">Esperando Repuesto</option>
+                            <option value="Listos para entregar">Listos para entregar</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="problema" class="label">Problema</label>
+                        <input type="text" id="problema" required class="input-form">
+                    </div>
+                </div>
+
+                <div class="modal-botones">
+                    <button type="button" onclick="cerrarModal()" class="boton boton-secundario">Cancelar</button>
+                    <button type="submit" class="boton boton-primario">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div> 
+    <!-- SCRIPT PARA CONTROLAR EL MENÚ DESPLEGABLE -->
+    <script src="./JS/JS_main_equipo_reparar.js"></script>
 </body>
+
 </html>
